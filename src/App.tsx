@@ -13,7 +13,7 @@ function App() {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch('https://todo-backend-three-lyart.vercel.app/');
+                const response = await fetch('https://todo-backend-three-lyart.vercel.app/tasks');
                 if (!response.ok) throw new Error('Failed to fetch tasks');
                 const content: Task[] = await response.json();
                 setTasks(content);
@@ -27,7 +27,7 @@ function App() {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://todo-backend-three-lyart.vercel.app/', {
+            const response = await fetch('https://todo-backend-three-lyart.vercel.app/tasks', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -46,7 +46,7 @@ function App() {
 
     const update = async (id: string, checked: boolean) => {
         try {
-            const response = await fetch(`https://todo-backend-three-lyart.vercel.app//${id}`, {
+            const response = await fetch(`https://todo-backend-three-lyart.vercel.app/tasks/${id}`, {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -65,7 +65,7 @@ function App() {
     const del = async (id: string) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
             try {
-                const response = await fetch(`https://todo-backend-three-lyart.vercel.app//${id}`, {
+                const response = await fetch(`https://todo-backend-three-lyart.vercel.app/tasks/${id}`, {
                     method: 'DELETE'
                 });
 
